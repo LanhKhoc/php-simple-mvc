@@ -1,7 +1,7 @@
 <?php
 
 $app = [];
-$app["controller"] = "home";
+$app["controller"] = DEFAULT_CONTROLLER;
 
 $route = isset($_GET["route"]) ? $_GET["route"] : null;
 $prs = explode("/", $route);
@@ -17,5 +17,3 @@ if(!is_file(ControllerREL . $controller . ".php")) {
 }
 
 new $controller();
-
- ?>

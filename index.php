@@ -1,7 +1,8 @@
 <?php
-include_once(__DIR__.'/config.php');
-include_once(__DIR__.'/define.php');
-include_once(__DIR__.'/vendor/autoload.php');
-include_once(__DIR__.'/vendor/app.php');
 
+require_once('./configs/common.php');
+require_once('./configs/path.php');
+require_once('./configs/database.php');
 
+require_once('./vendor/bootstrap/autoload.php');
+require_once('./vendor/bootstrap/app.php');

@@ -5,7 +5,7 @@ function __autoload($className) {
 	$firstCL 	= $arrCL[0];
 	$lastCL		= $arrCL[count($arrCL) - 1];
   $filename = "";
-  
+
 	if($firstCL == "vendor") $filename = "vendor/";
   $filename .= $lastCL . "s/" . $className . ".php";
 
@@ -15,5 +15,3 @@ function __autoload($className) {
     include_once("controllers/staticpages_controller.php");
   }
 }
-
- ?>

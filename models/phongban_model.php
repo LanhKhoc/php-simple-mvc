@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('APPLICATION')) die ('Bad requested!');
+
 class phongban_model extends vendor_model {
   protected $table = "PHONGBAN";
 

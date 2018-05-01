@@ -2,10 +2,12 @@
   <div class="container">
     <div class="mb-3 row">
       <div class="col-md-6">
-        <a href="<?php echo vendor_url_util::makeURL(['action' => 'create']) ?>" class="btn btn-secondary" title="Thêm phòng ban">
-          <span class="mr-1">Thêm</span>
-          <i class="fas fa-user-plus"></i>
-        </a>
+        <?php if($this->data['user_logged']) { ?>
+          <a href="<?php echo vendor_url_util::makeURL(['action' => 'create']) ?>" class="btn btn-secondary" title="Thêm phòng ban">
+            <span class="mr-1">Thêm</span>
+            <i class="fas fa-user-plus"></i>
+          </a>
+        <?php } ?>
       </div>
 
       <div class="col-md-6">

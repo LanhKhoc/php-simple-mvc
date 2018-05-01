@@ -1,9 +1,8 @@
-<?php function rmspace($buffer) { return preg_replace('~>\s*\n\s*<~', '><', $buffer); } ?>
-<?php ob_start("rmspace") ?>
-
 <section>
   <div class="container">
-    <form action="<?php echo vendor_url_util::makeURL(['action' => 'store']) ?>" method="POST" class="form mt-5">
+    <form action="<?php echo vendor_url_util::makeURL(['action' => 'update']) ?>" method="POST" class="form mt-5">
+      <input type="hidden" name="old_idpb" value="<?= $this->data['remember']['idpb'] ?>" />
+
       <div class="form-group row">
         <label for="example-text-input" class="offset-2 col-2 col-form-label text-center">Mã phòng ban</label>
         <div class="col-6">
@@ -36,5 +35,3 @@
     </form>
   </div>
 </section>
-
-<?php ob_get_flush() ?>

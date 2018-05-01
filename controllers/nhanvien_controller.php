@@ -27,4 +27,24 @@ class nhanvien_controller extends vendor_controller {
     $this->setProperty('data', $data);
     $this->view();
   }
+
+  public function create() {
+    $this->loginMiddleware();
+
+    $data = [];
+    $data['nhanvien'] = true;
+
+    $data['error']['idnv'] = isset($_SESSION['error']['idnv']) ? $_SESSION['error']['idnv'] : '';
+    $data['error']['hoten'] = isset($_SESSION['error']['hoten']) ? $_SESSION['error']['hoten'] : '';
+    $data['error']['diachi'] = isset($_SESSION['error']['diachi']) ? $_SESSION['error']['diachi'] : '';
+
+    // $data['remember']['idpb'] = isset($_SESSION['remember']['idpb']) ? $_SESSION['remember']['idpb'] : '';
+    // $data['remember']['mota'] = isset($_SESSION['remember']['mota']) ? $_SESSION['remember']['mota'] : '';
+    // $data['remember']['thoigian'] = isset($_SESSION['remember']['thoigian']) ? $_SESSION['remember']['thoigian'] : '';
+
+    session_destroy();
+
+    $this->setProperty('data', $data);
+    $this->view();
+  }
 }

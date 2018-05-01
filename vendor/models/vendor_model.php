@@ -55,10 +55,49 @@ class vendor_model {
 		return $this->conn->query($sql);
 	}
 
-	public function update() {}
-	public function insert() {}
-	public function destroy($id) {
-		$sql = "DELETE FROM {$this->table} WHERE id = '" . $this->conn->real_escape_string($id) . "'";
+	public function update($id, $options) {
+		$sql = "UPDATE {$this->table} SET ";
+		$conditions = " WHERE " . $this->conn->real_escape_string(array_keys($id)[0]) . "='" . $this->conn->real_escape_string(array_shift($id)) . "'";
+
+		foreach($options as $key => $value) {
+			$fields = $this->conn->real_escape_string($key);
+			$values = "'" . $this->conn->real_escape_string($value);
+
+			$sql .= $fields . "='" . $value . "',";
+		}
+
+		$sql = substr($sql, 0, -1) . $conditions;
+		return $this->conn->query($sql);
+	}
+
+	public function store($items) {
+		$fields = '';
+		$values = '';
+
+		foreach($items as $key => $value) {
+			$fields .= $this->conn->real_escape_string($key) . ',';
+			$values .= "'" . $this->conn->real_escape_string($value) . "',";
+		}
+
+		$sql = "INSERT INTO {$this->table} (" . substr($fields, 0, -1) . ") VALUES(" . substr($values, 0, -1) . ")";
+		return $this->conn->query($sql);
+	}
+
+	public function destroy($options) {
+		$conditions = '';
+
+		$conditions = 'WHERE ' . mysqli_real_escape_string($this->conn, array_keys($options)[0]) . "='" . $this->conn->real_escape_string(array_shift($options)) . "'";
+		foreach($options as $key => $value) {
+			if(strpos($key, '|') === 0) {
+				$conditions .= ' OR ' . $this->conn->real_escape_string(substr($key, 1)) . "='" . $this->conn->real_escape_string($value) . "'";
+			} else if(strpos($key, '&') === 0) {
+				$conditions .= ' AND ' . $this->conn->real_escape_string(substr($key, 1)) . "='" . $this->conn->real_escape_string($value) . "'";
+			} else {
+				$conditions .= ' AND ' . $this->conn->real_escape_string($key) . "='" . $this->conn->real_escape_string($value) . "'";
+			}
+		}
+
+		$sql = "DELETE FROM {$this->table} {$conditions}";
 		return $this->conn->query($sql);
 	}
 }
